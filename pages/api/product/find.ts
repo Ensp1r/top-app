@@ -8,9 +8,9 @@ const mockProducts: ProductModel[] = [
     tags: ['tutorial'],
     title: 'Product 1',
     link: 'https://example.com',
-    price: 99,
+    price: 9900,
     credit: 0,
-    oldPrice: 149,
+    oldPrice: 14900,
     description: 'Test',
     characteristics: [
       {
@@ -48,7 +48,7 @@ const mockProducts: ProductModel[] = [
     updatedAt: new Date(),
     __v: 0,
     image: 'https://placehold.co/600x400',
-    initialRating: 5,
+    initialRating: 1,
     reviews: [],
     reviewAvg: 0,
     reviewCount: 0,
