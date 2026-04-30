@@ -2,6 +2,7 @@ import axios from 'axios';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from 'querystring';
 import { JSX } from "react";
+import { API } from '../../helpers/api';
 import { firstLevelMenu } from '../../helpers/helpers';
 import { MenuItem } from '../../interfaces/menu.interface';
 import { TopLevelCategory, TopPageModel } from '../../interfaces/page.interface';
@@ -25,7 +26,7 @@ export default withLayout(TopPage)
 export const getStaticPaths: GetStaticPaths = async () => {
     let paths: string[] = []
     for (const menuItem of firstLevelMenu) {
-        const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+        const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find , {
             firstCategory: menuItem.id
         })
         paths = paths.concat(menu.flatMap(m => m.pages.map(p => `/${menuItem.route}/${p.alias}`)))
@@ -52,7 +53,7 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: G
     }
 
     try {
-        const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+        const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
             firstCategory: firstCategoryItem.id
         })
         if (menu.length == 0) {
@@ -61,8 +62,8 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: G
             }
         }
 
-        const { data: page } = await axios.get<TopPageModel>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/byAlias?alias=' + params.alias)
-        const { data: products } = await axios.post<ProductModel[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/product/find', {
+        const { data: page } = await axios.get<TopPageModel>(API.topPage.byAlias + params.alias)
+        const { data: products } = await axios.post<ProductModel[]>(API.product.find, {
             category: page.category,
             limit: 10
         })

@@ -1,3 +1,7 @@
+.ratingWrapper {
+    position: relative;
+}
+
 .filled svg{
     fill: var(--primary);
 }
@@ -8,4 +12,15 @@
 
 .editable {
     cursor: pointer;
+}
+
+.error svg {
+    stroke: var(--dark-red)
+}
+
+.errorMessage {
+    position: absolute;
+    bottom: -20px;
+    left: -4px;
+    color: var(--dark-red);
 }
