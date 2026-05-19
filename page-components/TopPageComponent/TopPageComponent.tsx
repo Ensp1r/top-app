@@ -8,6 +8,7 @@ import { sortReducer } from './sort.reducer';
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
     const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(sortReducer, { products, sort: SortEnum.Rating })
+    
 
 	const setSort = (sort: SortEnum) => {
 		dispatchSort({ type: sort })
@@ -26,7 +27,7 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
 			</div>
 
 			<div>
-				{sortedProducts && sortedProducts.map(product => (<Product key={product._id} product={product}/>))}
+				{sortedProducts && sortedProducts.map(product => (<Product layout key={product._id} product={product}/>))}
 			</div>
 
             <div className={styles.hhTitle}>

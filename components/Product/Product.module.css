@@ -132,7 +132,7 @@
 }
 
 .advantages {
-    border-left: 3px solid var(--green);
+    border-left: 3px solid #1DC37E;
     border-radius: 2px;
     padding-left: 15px;
     margin-bottom: 20px;
@@ -144,20 +144,15 @@
     padding-left: 15px;
 }
 
+.reviews {
+    overflow: hidden;
+    padding: 30px;
+}
+
 .reviewButton {
     margin-left: 20px;
 }
 
-.opened {
-    max-height: auto;
-    padding: 30px;
-}
-
-.closed {
-    overflow: hidden;
-    max-height: 0;
-    padding: 0;
-}
 
 @media screen and (max-width: 1320px) {
     .product {

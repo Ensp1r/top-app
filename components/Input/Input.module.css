@@ -16,6 +16,7 @@
 
     font-family: var(--font-family);
 
+    box-sizing: border-box; 
 }
 
 .input::placeholder {
