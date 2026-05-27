@@ -54,17 +54,26 @@ export const Product = motion(forwardRef(( { product, className, ...props }: Pro
                 </div>
                 <div className={styles.title}>{product.title}</div>
                 <div className={styles.price}>
-                    {priceRu(product.price)}
-                    {product.oldPrice && <Tag className={styles.oldPrice} color="green">{priceRu(product.price - product.oldPrice)}</Tag>}
+                    <span className='visualyHidden'>Цена</span>{priceRu(product.price)}
+                    {
+                        product.oldPrice && 
+                        <Tag className={styles.oldPrice} color="green">
+                            <span className='visualyHidden'>Скидка</span>
+                            {priceRu(product.price - product.oldPrice)}
+                        </Tag>
+                    }
                 </div>
                 <div className={styles.credit}>
-                    {priceRu(product.credit)}
+                    <span className='visualyHidden'>Кредит</span>{priceRu(product.credit)}
                     <span className={styles.month}>/мес</span>
                 </div>
-                <div className={styles.rating}><Rating rating={product.reviewAvg ?? product.initialRating}/></div>
+                <div className={styles.rating}>
+                    <span className='visualyHidden'>{'рейтинг' + (product.reviewAvg ?? product.initialRating)}</span>
+                    <Rating rating={product.reviewAvg ?? product.initialRating}/>
+                </div>
                 <div className={styles.tags}>{product.categories.map(category => <Tag key={category} className={styles.category} color='ghost'>{category}</Tag>)}</div>
-                <div className={styles.priceTitle}>цена</div>
-                <div className={styles.creditTitle}>кредит</div>
+                <div className={styles.priceTitle} aria-hidden={true}>цена</div>
+                <div className={styles.creditTitle} aria-hidden={true}>кредит</div>
                 <div className={styles.rateTitle}>
                     <a href='#ref' onClick={scrollToReview}>
                         {product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
@@ -101,6 +110,7 @@ export const Product = motion(forwardRef(( { product, className, ...props }: Pro
                         className={styles.reviewButton} 
                         appearance="ghost" 
                         arrow={isReviewOpened ? 'down' : 'right'}
+                        aria-expanded={isReviewOpened}
                     >
                         Читать отзывы
                     </Button>

@@ -35,3 +35,7 @@
     grid-template-columns: 1fr;
     color: var(--black);
 }
+
+.sortName {
+    display: none;
+}
